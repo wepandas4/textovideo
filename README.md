@@ -1,8 +1,8 @@
-Click2Flick - Text-to-Video
+# Click2Flick - Text-to-Video
 
 Click2Flick leverages generative text-to-video technology with advanced API integrations for dynamic content creation.
 
-Overview
+## Overview
 
 This repository contains three main files:
 1. image_search.py
@@ -27,7 +27,7 @@ This repository contains three main files:
         Monitors the animation’s status with GET requests, providing updates until completion.
 
 
-Dependencies
+## Dependencies
 
    To run these files, install the following libraries:
    1.pip install requests spacy transformers pillow
@@ -35,9 +35,23 @@ Dependencies
    Additionally, download the spaCy English model:
    1.python -m spacy download en_core_web_sm
 
-Usage Instructions
+## Usage Instructions
 
 1.image_search.py: Run this file to extract keywords and search for images.
 2.video_search.py: Run this file to find and rank videos by relevance to the search query.
 3.main.py: Use this as the main script to combine image search and animation creation.
+
+## About the Team
+
+This project was developed by our dedicated team. We are proud of our collective efforts and the innovative solutions we've created!
+
+| Team Member         | GitHub Profile                                           | Email                        |
+|---------------------|----------------------------------------------------------|------------------------------|
+| **Priyanka M K**    | [Priyaaaa2](https://github.com/Priyaaaa2)                | priyankamk2903@gmail.com     |
+| **Sumukh C**        | [Sumu004](https://github.com/Sumu004)                    | sumukhchaluvaraj@gmail.com   |
+| **Ravi J Gowda**    | [RaviGowda29](https://github.com/RaviGowda29)            | ravigowdaedu29@gmail.com     |
+| **Yashwanth M**     | [yashwanthm3012](https://github.com/yashwanthm3012)      | dev.yashwanthm3012@gmail.com |
+
+We appreciate the hard work and collaboration that made this project possible!
+
 
