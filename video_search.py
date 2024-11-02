@@ -10,7 +10,7 @@ url = f"https://api.pexels.com/videos/search?query={q}&per_page={per_page}"
 
 # Set the request headers with your API key
 headers = {
-    'Authorization': 'Xde253ZtLCXoWuk4MVTtjUHkwOOOwoangPMrd80Fl7rfyuPcY7cI0HCh',
+    'Authorization': 'YOUR_API_KEY',
 }
 
 # Send the GET request to the API
