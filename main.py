@@ -18,8 +18,8 @@ def extract_keywords(text):
     return keywords
 
 def search_images(query):
-    api_key = 'AIzaSyD6ZkQGu8yecrMsDYeD1WA-1DL1-7EKY4w'  # Replace with your API key
-    cse_id = 'f0047a0ee6fcc4725'  # Replace with your Custom Search Engine ID
+    api_key = 'YOUR_API_KEY'  # Replace with your API key
+    cse_id = 'YOUR_CXID'  # Replace with your Custom Search Engine ID
 
     keywords = extract_keywords(query)
     search_query = ' '.join(keywords)
@@ -61,7 +61,7 @@ if image_url is not None:
     })
     post_headers = {
         'Content-Type': 'application/json',
-        'Authorization': 'Basic YmFqb2hlNzMyM0BmdWx3YXJrLmNvbQ:cSVoKwnfLkQXLGSzsjS4B'
+        'Authorization': 'Basic YOUR_DID_API_KEY'
     }
     post_response = requests.post(post_url, headers=post_headers, data=post_payload)
     post_data = post_response.json()
@@ -75,7 +75,7 @@ if image_url is not None:
         get_url = "https://api.d-id.com/animations/{}".format(animation_id)
         get_payload = {}
         get_headers = {
-            'Authorization': 'Basic YmFqb2hlNzMyM0BmdWx3YXJrLmNvbQ:cSVoKwnfLkQXLGSzsjS4B'
+            'Authorization': 'Basic YOUR_DID_API_KEY'
         }
 
         # Check animation status until it is no longer "started"
