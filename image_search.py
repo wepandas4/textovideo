@@ -11,7 +11,7 @@ url = "https://www.googleapis.com/customsearch/v1"
 # Set the request parameters including your API key and custom search engine ID
 params = {
     "key": "YOUR_API_KEY",
-    "cx": "f0047a0ee6fcc4725",
+    "cx": "YOUR_CXID",
     "q": q,
     "num": num_images,
     "searchType": "image"
