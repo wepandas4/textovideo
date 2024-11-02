@@ -45,6 +45,8 @@ This repository contains three main files:
 - video_search.py: Run this file to find and rank videos by relevance to the search query.
 - main.py: Use this as the main script to combine image search and animation creation.
 
+***Run `main.py` file***
+
 ## About the Team
 
 This project was developed by our dedicated team. We are proud of our collective efforts and the innovative solutions we've created!
