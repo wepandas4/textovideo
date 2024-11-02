@@ -41,9 +41,9 @@ This repository contains three main files:
 
 ## Usage Instructions
 
-1.image_search.py: Run this file to extract keywords and search for images.
-2.video_search.py: Run this file to find and rank videos by relevance to the search query.
-3.main.py: Use this as the main script to combine image search and animation creation.
+- image_search.py: Run this file to extract keywords and search for images.
+- video_search.py: Run this file to find and rank videos by relevance to the search query.
+- main.py: Use this as the main script to combine image search and animation creation.
 
 ## About the Team
 
