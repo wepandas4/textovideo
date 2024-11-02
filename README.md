@@ -32,9 +32,10 @@ This repository contains three main files:
    To run these files, install the following libraries:
    ```bash
    pip install requests spacy transformers pillow
-    ```
+   ```
+
    Additionally, download the spaCy English model:
-    ```bash
+   ```bash
    python -m spacy download en_core_web_sm
    ```
 
