@@ -2,50 +2,38 @@
 
 Click2Flick leverages generative text-to-video technology with advanced API integrations for dynamic content creation.
 
-## Overview
+## What it does
 
-This repository contains three main files:
-1. image_search.py
+- `image_search.py`: extracts keywords from a query with spaCy, searches
+  Google Custom Search for a matching image, and returns the top result.
+- `video_search.py`: searches Pexels for videos matching a query, then
+  ranks candidates by cosine similarity between BERT embeddings of the
+  query and each video's title, returning the best match.
+- `main.py`: the end-to-end pipeline. Takes a query, finds an image with
+  `image_search.py`, then sends it to D-ID's API to animate it, polling
+  until the animation is ready.
 
-    Purpose: Extracts keywords from the user query and searches for relevant images.
-    Functionality:
-        Uses spaCy to process user input and extract key nouns/proper nouns.
-        Queries the Google Custom Search API with refined keywords to retrieve and display the first matching image.
+## How to use it
 
-2. video_search.py
+```bash
+pip install -r requirements.txt
+python -m spacy download en_core_web_sm
+cp .env.example .env
+```
 
-    Purpose: Searches for videos based on the user’s query.
-    Functionality:
-        Uses the Pexels API to find videos relevant to the query.
-        Ranks video matches by calculating similarity scores using BERT, identifying the best match.
+Fill in `.env` with your own keys:
 
-3. main.py
+- `GOOGLE_API_KEY` and `GOOGLE_CSE_ID`: Google Custom Search
+- `PEXELS_API_KEY`: Pexels
+- `D_ID_EMAIL` and `D_ID_API_KEY`: D-ID
 
-    Purpose: Combines image search with animation creation, producing a video from the searched image.
-    Functionality:
-        Calls image_search.py to retrieve an image URL and then sends it to D-ID’s API to generate an animation.
-        Monitors the animation’s status with GET requests, providing updates until completion.
+Then run any of the three scripts directly:
 
-
-## Dependencies
-
-   To run these files, install the following libraries:
-   ```bash
-   pip install requests spacy transformers pillow
-   ```
-
-   Additionally, download the spaCy English model:
-   ```bash
-   python -m spacy download en_core_web_sm
-   ```
-
-## Usage Instructions
-
-- image_search.py: Run this file to extract keywords and search for images.
-- video_search.py: Run this file to find and rank videos by relevance to the search query.
-- main.py: Use this as the main script to combine image search and animation creation.
-
-***Run `main.py` file***
+```bash
+python main.py
+python image_search.py
+python video_search.py
+```
 
 ## About the Team
 
@@ -59,5 +47,3 @@ This project was developed by our dedicated team. We are proud of our collective
 | **Yashwanth M**     | [yashwanthm3012](https://github.com/yashwanthm3012)      | dev.yashwanthm3012@gmail.com |
 
 We appreciate the hard work and collaboration that made this project possible!
-
-

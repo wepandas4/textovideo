@@ -1,61 +1,45 @@
+import os
+
 import requests
-from transformers import AutoTokenizer, AutoModelForSequenceClassification
+import spacy
+from dotenv import load_dotenv
 
-# Set the search query and number of images to retrieve
-q = 'ronaldo and messi'  # Example search query
-num_images = 5  # Number of images to retrieve
+load_dotenv()
 
-# Set the API URL
-url = "https://www.googleapis.com/customsearch/v1"
+nlp = spacy.load('en_core_web_sm')
 
-# Set the request parameters including your API key and custom search engine ID
-params = {
-    "key": "YOUR_API_KEY",
-    "cx": "YOUR_CXID",
-    "q": q,
-    "num": num_images,
-    "searchType": "image"
-}
 
-# Send the GET request to the API
-response = requests.get(url, params=params)
+def extract_keywords(text):
+    doc = nlp(text)
+    return [token.text for token in doc if token.pos_ in ('NOUN', 'PROPN')]
 
-# Check if the request was successful
-if response.status_code == 200:
-    # Get the JSON response
-    data = response.json()
 
-    # Check if images were found in the response
-    if 'items' in data and len(data['items']) > 0:
-        # Initialize BERT tokenizer and model
-        tokenizer = AutoTokenizer.from_pretrained('bert-base-uncased')
-        model = AutoModelForSequenceClassification.from_pretrained('bert-base-uncased')
+def search_images(query):
+    api_key = os.environ['GOOGLE_API_KEY']
+    cse_id = os.environ['GOOGLE_CSE_ID']
 
-        # Define a function to calculate the text-image similarity score
-        def calculate_similarity(text1, text2):
-            encoded_inputs = tokenizer(text1, text2, padding=True, truncation=True, return_tensors='pt')
-            outputs = model(**encoded_inputs)
-            logits = outputs.logits
-            similarity_score = logits.softmax(dim=1)[:, 1].item()
-            return similarity_score
+    keywords = extract_keywords(query)
+    search_query = ' '.join(keywords) or query
 
-        # Define the reference text
-        reference_text = 'A happy woman smiling'
+    params = {
+        'key': api_key,
+        'cx': cse_id,
+        'q': search_query,
+        'searchType': 'image',
+    }
 
-        # Calculate the similarity score for each image and the reference text
-        similarity_scores = []
-        for item in data['items']:
-            image_title = item['title'] + ' ' + item['link']
-            similarity_score = calculate_similarity(reference_text, image_title)
-            similarity_scores.append(similarity_score)
+    response = requests.get('https://www.googleapis.com/customsearch/v1', params=params)
+    response.raise_for_status()
+    results = response.json()
 
-        # Find the index of the image with the highest similarity score
-        best_index = max(range(len(similarity_scores)), key=similarity_scores.__getitem__)
+    items = results.get('items')
+    if not items:
+        return None
 
-        # Get the URL of the best-matching image
-        best_image_url = data['items'][best_index]['link']
-        print("Best Image URL:", best_image_url)
-    else:
-        print("No images found for the search query.")
-else:
-    print("Request failed with status code:", response.status_code)
+    return items[0]['link']
+
+
+if __name__ == '__main__':
+    query = input('Enter image search query: ')
+    image_url = search_images(query)
+    print(image_url or 'No image results found.')
